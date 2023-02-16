@@ -4,7 +4,7 @@
     <h4 class="mt-4 font-weight-bold py-2 mb-0">BASCULAS FABRICA DE APRENDIZAJE EAFIT</h4>
     <h5 class="mt-2 mb-3 font-weight-bold py-3 mb-0">INFORMACIÓN EN TIEMPO REAL</h5>
 
-    <!-- INICIO CARDS -->
+    <!-- INICIO CARDS BASCULAS-->
     <b-card class="m-3" border-variant="dark">
 
       <!-- FILA 1 -->
