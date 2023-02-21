@@ -17,14 +17,11 @@
           <!-- / Logo -->
           <!-- <h5 class="text-center text-muted font-weight-normal mb-4">Bienvenido a SyncBox i4.0</h5> -->
           <b-row class="mb-2">
-            <b-col class="col input-group">
-            <h5 class="font-weight-bold">Estacion Anterior:</h5>
+            <b-col class="col input-group ml-4">
+            <h5 class="font-weight-bold">Estacion Anterior: {{ previuosStation }}</h5>
             </b-col>
             <b-col class="col input-group">
-            <h5 class="font-weight-bold">Estacion Actual:</h5>
-            </b-col>
-            <b-col class="col input-group">
-            <h5 class="font-weight-bold">Estacion Siguiente:</h5>
+            <h5 class="font-weight-bold">Estacion Siguiente: {{ nextStation }}</h5>
             </b-col>
         </b-row>
 
@@ -78,9 +75,7 @@
             </div>
 
             <div class="input-group mt-4">
-              <h5 class="font-weight-bold">Tiempo de espera actual: <span style="font-weight: normal
-              ;">{{ timeWait }}</span> </h5>
-
+              <h5 class="font-weight-bold">Tiempo de espera actual: <span style="font-weight: normal;">{{ timeWait }}</span></h5>
             </div>
           </div>
         </b-card-footer>
@@ -156,6 +151,9 @@ export default {
 
     timeWait:5,
 
+    previuosStation:"",
+    nextStation:"",
+
     credentials: {
       // email: "syncbox",
       // password: "123456"
@@ -164,46 +162,29 @@ export default {
     },
     messageClass: "",
     messageIcons: "",
-    // info : `http://10.1.1.11/datacontrollerloginx/`
-    //info : InfoConfig.login(),
-    // info : `http://10.50.0.134/datacontrollerloginx/`
-    //  info : `https://sw.syncbox.cloud/datacontrollerloginx/`
-    // info : `http://192.168.115.48:1900/loginx/`
-    // info : "10.50.0.134"
-    // info : `http://192.168.0.232/datacontrollerloginx/`
   }),
+  mounted(){
+    setInterval(() => {
+      axios.get('http://192.168.1.28:8000/EAFIT/status/estacion').then( data => {
+        console.log(data.data)
+        this.previuosStation = data.data.anterior
+        this.nextStation = data.data.siguiente
+
+        if(this.previuosStation == "-1"){
+          this.previuosStation = ""
+        }
+        if(this.nextStation == "-1"){
+          this.nextStation = ""
+        }
+      })
+    }, 5000)
+  },
   methods: {
-    // validateBeforeSubmit() {
-    //         if (this.credentials.email != "" && this.credentials.password != "") {
-    //                 axios.get(this.info+`${this.credentials.email}/${this.credentials.password}`)
-    //                     .then(response => {
-    //                             localStorage.removeItem('syncbox.cloud')
-    //                             localStorage.setItem('syncbox.cloud', JSON.stringify( response.data));
-    //                             this.$router.push(this.$route.query.redirect || '/')
-    //                         })
-    //                         .catch(e => {
-    //                 this.$notify({
-    //                   group: 'notifications-custom-template',
-    //                   title: 'Error Validación',
-    //                   text: 'El usuario ingresado no existe o contraseña incorrecta, ¡por favor valide!',
-    //                   type:'error'
-    //                 })
-    //             });
-    //             return;
-    //         }else{
-    //           this.$notify({
-    //             group: 'notifications-custom-template',
-    //             title: 'Error Validación',
-    //             text: 'Por favor ingrese los datos',
-    //             type:'error'
-    //           })
-    //           // this.messageClass="media text-white p-3 mb-2 bg-danger"
-    //           // this.messageIcons="pe-7s-close-circle"
-    //         }
-    // },
+
+    //ENDPOINT EAFIT 10.203.13.250
 
     async sendTimeWait() {
-        await axios.post('http://10.203.13.250:8000/EAFIT/timewait',{"timewait":this.timeWait})
+        await axios.post('http://192.168.1.28:8000/EAFIT/timewait',{"timewait":this.timeWait})
           .then(response => {
             if(response.status == 200){
               this.$notify({
@@ -219,7 +200,7 @@ export default {
     async infoCar(id) {
       console.log("ID BUTTON:", id)
 
-      await axios.post('http://10.203.13.250:8000/EAFIT/estacion',{"peticion":id})
+      await axios.post('http://192.168.1.28:8000/EAFIT/estacion',{"peticion":id})
         .then(response => {
           if(response.status == 200){
             this.$notify({
