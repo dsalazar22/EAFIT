@@ -11,5 +11,6 @@ require (
 
 require (
 	github.com/felixge/httpsnoop v1.0.1 // indirect
+	github.com/go-redis/redis v6.15.9+incompatible // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 )

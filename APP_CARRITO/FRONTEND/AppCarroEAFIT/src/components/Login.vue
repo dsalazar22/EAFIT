@@ -165,7 +165,7 @@ export default {
   }),
   mounted(){
     setInterval(() => {
-      axios.get('http://192.168.1.28:8000/EAFIT/status/estacion').then( data => {
+      axios.get('http://10.203.13.250:8000/EAFIT/status/estacion').then( data => {
         console.log(data.data)
         this.previuosStation = data.data.anterior
         this.nextStation = data.data.siguiente
@@ -184,7 +184,7 @@ export default {
     //ENDPOINT EAFIT 10.203.13.250
 
     async sendTimeWait() {
-        await axios.post('http://192.168.1.28:8000/EAFIT/timewait',{"timewait":this.timeWait})
+        await axios.post('http://10.203.13.250:8000/EAFIT/timewait',{"timewait":this.timeWait})
           .then(response => {
             if(response.status == 200){
               this.$notify({
@@ -200,7 +200,7 @@ export default {
     async infoCar(id) {
       console.log("ID BUTTON:", id)
 
-      await axios.post('http://192.168.1.28:8000/EAFIT/estacion',{"peticion":id})
+      await axios.post('http://10.203.13.250:8000/EAFIT/estacion',{"peticion":id})
         .then(response => {
           if(response.status == 200){
             this.$notify({

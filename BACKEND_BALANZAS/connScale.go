@@ -35,84 +35,110 @@ func ScaleMessage(b string) {
 }
 
 func initWebsocketClient(ad string) {
-	fmt.Println("Entro")
+	//fmt.Println("Entro")
 	var info Scale
 
+	fmt.Println(ad)
+
 	ws, err := websocket.Dial(fmt.Sprintf("ws://%s/ws", ad), "", fmt.Sprintf("http://%s/", ad))
-	//fmt.Println(websocket.Dial(fmt.Sprintf("ws://%s/ws", ad), "", fmt.Sprintf("http://%s/", ad)))
-	//fmt.Println("ws:", ws))
+	// fmt.Println(websocket.Dial(fmt.Sprintf("ws://%s/ws", ad), "", fmt.Sprintf("http://%s/", ad)))
+	// fmt.Println("ws:", ws)
 
 	if err != nil {
 		// fmt.Printf("Dial failed: %s\n", err.Error())
 		// os.Exit(1)
+
+		// info.Ip = ad
+		// info.Weight = ""
+		// info.Message = "INACTIVA"
+		// fmt.Println(ad)
+		// fmt.Println(err)
+
+		// b, _ := json.Marshal(info)
+
+		// ScaleMessage((string(b)))
 	} else {
 		incomingMessages := make(chan string)
 		go readClientMessages(ws, incomingMessages, ad)
 		// i := 0
-		for {
-			select {
-			case message := <-incomingMessages:
-				//fmt.Println(<-incomingMessages)
-				//fmt.Println("--------------------------------------")
-				//time.Sleep(5 * time.Second)
-				//fmt.Println(ad, strip(message))
-				if message != "" {
+		// for {
+		select {
+		case message := <-incomingMessages:
+			//fmt.Println(<-incomingMessages)
+			//fmt.Println("--------------------------------------")
+			//time.Sleep(5 * time.Second)
+			//fmt.Println(ad, strip(message))
+			info.Message = "INACTIVA"
 
-					//fmt.Println("PESO:", strip(message))
+			if message != "" {
 
-					mapMutex.Lock()
-					pesos[ad] = strip(message)
-					mapMutex.Unlock()
+				strpeso := strip(message)
 
-					info.Ip = ad
-					info.Weight = pesos[ad]
-					info.UnitWeight = ""
+				//fmt.Println("PESO:", strip(message))
 
-					//fmt.Println(ad, pesos[ad])
+				mapMutex.Lock()
+				pesos[ad] = strpeso
+				mapMutex.Unlock()
 
-					if pesos[ad] != "" {
-						info.Message = "ACTIVA"
-					} else {
-						info.Message = "INACTIVA"
-					}
-					//fmt.Println(info)
+				info.Ip = ad
+				info.Weight = strpeso
+				info.UnitWeight = ""
 
-					b, e := json.Marshal(info)
+				//fmt.Println(ad, pesos[ad])
 
-					if e == nil {
-						ScaleMessage((string(b)))
-						//fmt.Println(string(b))
-					} else {
-						fmt.Println(e)
-					}
+				info.Message = "ACTIVA"
+				//fmt.Println(info)
 
-					//ScaleMessage(string(b))
-					//fmt.Println("PESOS", pesos)
+				infoUnitWeight := GetInfoBascula(ad)
+
+				var data struct {
+					Bascula    string `json:"bascula"`
+					PesoUnidad string `json:"peso_unidad"`
+					Producto   string `json:"product"`
 				}
+
+				json.Unmarshal([]byte(infoUnitWeight), &data)
+
+				info.UnitWeight = data.PesoUnidad
+				info.Product = data.Producto
+
+				//ScaleMessage(string(b))
+				//fmt.Println("PESOS", pesos)
+
+				b, _ := json.Marshal(info)
+
+				ScaleMessage((string(b)))
 			}
 
 		}
+
 	}
+
+	// }
 }
 
 func readClientMessages(ws *websocket.Conn, incomingMessages chan string, ad string) {
 
-	for {
-		var message string
-		// err := websocket.JSON.Receive(ws, &message)
-		err := websocket.Message.Receive(ws, &message)
-		// fmt.Println("err:", err)
-		// fmt.Println("message:", message)
-		if err != nil {
-			// fmt.Printf("Error::: %s\n", err.Error())
-			// return
-			time.Sleep(5 * time.Second)
-			ws, _ = websocket.Dial(fmt.Sprintf("ws://%s/ws", ad), "", fmt.Sprintf("http://%s/", ad))
-		}
-		incomingMessages <- strings.TrimSuffix(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(message, "ST,GS,", ""), "+", ""), "kg", ""), "=", ""), "\n")
-		// fmt.Println(ad, strings.TrimSuffix(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(message, "ST,GS,", ""), "+", ""), "kg", ""), "=", ""), "\n"))
-		// fmt.Println("--------------------------------------")
+	// for {
+	var message string
+	// err := websocket.JSON.Receive(ws, &message)
+	err := websocket.Message.Receive(ws, &message)
+	// fmt.Println("err:", err)
+	// fmt.Println("message:", message)
+	if err != nil {
+
+		// fmt.Printf("Error::: %s\n", err.Error())
+		// fmt.Printf(message)
+		// return
+		time.Sleep(5 * time.Second)
+		ws, _ = websocket.Dial(fmt.Sprintf("ws://%s/ws", ad), "", fmt.Sprintf("http://%s/", ad))
+	} else {
+
 	}
+	incomingMessages <- strings.TrimSuffix(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(message, "ST,GS,", ""), "+", ""), "kg", ""), "=", ""), "\n")
+	// fmt.Println(ad, strings.TrimSuffix(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(message, "ST,GS,", ""), "+", ""), "kg", ""), "=", ""), "\n"))
+	// fmt.Println("--------------------------------------")
+	// }
 }
 
 func strip(s string) string {

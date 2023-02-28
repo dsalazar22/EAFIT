@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -15,6 +15,7 @@ var address []string
 var pesos map[string]string
 var mapMutex = &sync.Mutex{}
 var infoScale = make([]Scale, 0)
+var infowebapp []Scale
 
 type Scale struct {
 	Ip         string `json:"ip"`
@@ -121,7 +122,8 @@ func setUnitWeight(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type,  Authorization")
 
-	var scale Scale
+	//var scale Scale
+	var ip string
 
 	if r.Method == "POST" {
 
@@ -136,7 +138,7 @@ func setUnitWeight(w http.ResponseWriter, r *http.Request) {
 
 		json.Unmarshal(body, &data)
 
-		println(data.Bascula)
+		//println(data.Bascula)
 
 		// Acceder a los campos del JSON
 		domain := getDomain(data.Bascula)
@@ -146,23 +148,24 @@ func setUnitWeight(w http.ResponseWriter, r *http.Request) {
 		for _, v := range address {
 			if strings.Contains(v, domain) {
 				//v.UnitWeight = data.PesoUnidad
-				scale.Ip = v
-				fmt.Println("infoScale", scale)
+				ip = v
+				//fmt.Println("infoScale", ip)
 			}
 		}
 
-		scale.Message = "OK"
-		scale.Product = data.Producto
-		scale.UnitWeight = data.PesoUnidad
+		// scale.Message = "OK"
+		// scale.Product = data.Producto
+		// scale.UnitWeight = data.PesoUnidad
 
-		b, _ := json.Marshal(scale)
+		// b, _ := json.Marshal(scale)
 
-		fmt.Println(string(b))
+		// fmt.Println(string(b))
+
+		SetInfoBascula(ip, string(body))
 
 		//scale := info["bascula"]
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(b))
-
+		w.Write([]byte("OK"))
 	}
 }
 
@@ -230,11 +233,16 @@ func main() {
 	address = append(address, "192.168.25.211:6432")
 	address = append(address, "192.168.25.212:6432")
 
-	for _, v := range address {
-		go initWebsocketClient(v)
-	}
+	go func() {
+		for {
+			for _, v := range address {
+				go initWebsocketClient(v)
+			}
+			time.Sleep(time.Millisecond * 100)
+		}
+	}()
 
-	// for _, v := range infoScale {
+	// for _, v : = range infoScale {
 	// 	go initWebsocketClient(v.Ip, v.UnitWeight)
 	// }
 
