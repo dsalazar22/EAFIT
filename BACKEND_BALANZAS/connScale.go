@@ -38,36 +38,24 @@ func initWebsocketClient(ad string) {
 	//fmt.Println("Entro")
 	var info Scale
 
-	fmt.Println(ad)
+	//fmt.Println(ad)
 
 	ws, err := websocket.Dial(fmt.Sprintf("ws://%s/ws", ad), "", fmt.Sprintf("http://%s/", ad))
 	// fmt.Println(websocket.Dial(fmt.Sprintf("ws://%s/ws", ad), "", fmt.Sprintf("http://%s/", ad)))
+	// fmt.Println("err:", err)
 	// fmt.Println("ws:", ws)
 
 	if err != nil {
-		// fmt.Printf("Dial failed: %s\n", err.Error())
-		// os.Exit(1)
 
-		// info.Ip = ad
-		// info.Weight = ""
-		// info.Message = "INACTIVA"
-		// fmt.Println(ad)
-		// fmt.Println(err)
-
-		// b, _ := json.Marshal(info)
-
-		// ScaleMessage((string(b)))
 	} else {
 		incomingMessages := make(chan string)
 		go readClientMessages(ws, incomingMessages, ad)
 		// i := 0
 		// for {
 		select {
+
 		case message := <-incomingMessages:
-			//fmt.Println(<-incomingMessages)
-			//fmt.Println("--------------------------------------")
-			//time.Sleep(5 * time.Second)
-			//fmt.Println(ad, strip(message))
+
 			info.Message = "INACTIVA"
 
 			if message != "" {
@@ -102,12 +90,12 @@ func initWebsocketClient(ad string) {
 				info.UnitWeight = data.PesoUnidad
 				info.Product = data.Producto
 
-				//ScaleMessage(string(b))
-				//fmt.Println("PESOS", pesos)
-
 				b, _ := json.Marshal(info)
 
-				ScaleMessage((string(b)))
+				//ScaleMessage((string(b)))
+
+				ScaleMessage(string(b))
+				// fmt.Println("PESOS", string(b))
 			}
 
 		}

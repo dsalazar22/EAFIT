@@ -6,8 +6,8 @@
         <img id="logo-eafit" src="../assets/img/eafit-logo.png" alt="">
       </div>
       <div class="col">
-        <h4 class="mt-4 font-weight-bold py-2 mb-0">BASCULAS FABRICA DE APRENDIZAJE EAFIT</h4>
-        <h5 class="mt-2 mb-3 font-weight-bold py-3 mb-0">INFORMACIÓN EN TIEMPO REAL</h5>
+        <div class="display-3 mt-4">Pick to Light </div>
+        <div>TIEMPO REAL</div>
       </div>
       <div class="col-auto mr-4 mt-5">
         <img id="logo-syncbox" src="../assets/img/logosbx.png" alt="">
@@ -34,7 +34,11 @@
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
 
             <template #header>
-              <h6>BASCULA #1</h6>
+              <div @click="openModalScale('Bascula #1')" id="btn-scale">
+                
+                  <h6>Bascula #1</h6>
+                
+              </div>
             </template>
 
             <div>
@@ -62,7 +66,9 @@
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
 
             <template #header>
-              <h6>BASCULA #2</h6>
+              <div @click="openModalScale('Bascula #2')" id="btn-scale">
+              <h6>Bascula #2</h6>
+              </div>
             </template>
 
             <div>
@@ -91,7 +97,9 @@
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
 
             <template #header>
-              <h6>BASCULA #3</h6>
+              <div @click="openModalScale('Bascula #3')" id="btn-scale">
+              <h6>Bascula #3</h6>
+              </div>
             </template>
 
             <div>
@@ -119,7 +127,9 @@
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
 
             <template #header>
-              <h6>BASCULA #4</h6>
+              <div @click="openModalScale('Bascula #4')" id="btn-scale">
+              <h6>Bascula #4</h6>
+              </div>
             </template>
 
             <div>
@@ -152,7 +162,9 @@
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
 
             <template #header>
-              <h6>BASCULA #5</h6>
+              <div @click="openModalScale('Bascula #5')" id="btn-scale">
+              <h6>Bascula #5</h6>
+              </div>
             </template>
 
             <div>
@@ -180,7 +192,9 @@
           <b-card class="shadow" no-body :header-bg-variant="items[5].bgColor" :header-text-variant="items[5].fontColor" :border-variant="items[0].bgColor" 
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
             <template #header>
-              <h6>BASCULA #6</h6>
+              <div @click="openModalScale('Bascula #6')" id="btn-scale">
+              <h6>Bascula #6</h6>
+              </div>
             </template>
 
             <div>
@@ -208,7 +222,9 @@
           <b-card class="shadow" no-body :header-bg-variant="items[6].bgColor" :header-text-variant="items[6].fontColor" :border-variant="items[0].bgColor" 
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
             <template #header>
-              <h6>BASCULA #7</h6>
+              <div @click="openModalScale('Bascula #7')" id="btn-scale">
+              <h6>Bascula #7</h6>
+              </div>
             </template>
 
             <div>
@@ -235,7 +251,9 @@
           <b-card class="shadow" no-body :header-bg-variant="items[7].bgColor" :header-text-variant="items[7].fontColor" :border-variant="items[0].bgColor" 
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
             <template #header>
-              <h6>BASCULA #8</h6>
+              <div @click="openModalScale('Bascula #8')" id="btn-scale">
+              <h6>Bascula #8</h6>
+              </div>
             </template>
 
             <div>
@@ -266,7 +284,9 @@
           <b-card class="shadow" no-body :header-bg-variant="items[8].bgColor" :header-text-variant="items[8].fontColor" :border-variant="items[0].bgColor" 
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
             <template #header>
-              <h6>BASCULA #9</h6>
+              <div @click="openModalScale('Bascula #9')" id="btn-scale">
+              <h6>Bascula #9</h6>
+              </div>
             </template>
 
             <div>
@@ -293,7 +313,9 @@
           <b-card class="shadow" no-body :header-bg-variant="items[9].bgColor" :header-text-variant="items[9].fontColor" :border-variant="items[0].bgColor" 
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
             <template #header>
-              <h6>BASCULA #10</h6>
+              <div @click="openModalScale('Bascula #10')" id="btn-scale">
+              <h6>Bascula #10</h6>
+              </div>
             </template>
 
             <div>
@@ -320,7 +342,9 @@
           <b-card class="shadow" no-body :header-bg-variant="items[10].bgColor" :header-text-variant="items[10].fontColor" :border-variant="items[0].bgColor" 
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
             <template #header>
-              <h6>BASCULA #11</h6>
+              <div @click="openModalScale('Bascula #12')" id="btn-scale">
+              <h6>Bascula #11</h6>
+              </div>
             </template>
 
             <div>
@@ -349,7 +373,9 @@
           :header-border-variant="items[0].bgColor" :footer-border-variant="items[0].bgColor">
 
             <template #header>
-              <h6>BASCULA #12</h6>
+              <div @click="openModalScale('Bascula #12')" id="btn-scale">
+              <h6>Bascula #12</h6>
+              </div>
             </template>
 
             <div>
@@ -374,6 +400,32 @@
         </div>
       </div>
     <!-- </b-card> -->
+
+    <!-- INICIO MODAL DE CADA BASCULA -->
+      <b-modal v-model="showModalScale" size="lg">
+        <template #modal-title>
+          {{ titleModal }}
+        </template>
+        <div>
+          <h6>Seleccione un producto:</h6>
+
+          <multiselect v-model="value" :options="items"
+          :searchable="true" :show-labels="false" placeholder="Productos disponibles...">
+
+
+
+          </multiselect>
+        </div>
+
+        <template #modal-footer>
+          <div class="input-group" style="margin-left: 62%;">
+            <button class="btn btn-primary mr-2">Guardar</button>
+            <button class="btn btn-danger" @click="closeModalScale()">Cerrar</button>
+          </div>
+          
+        </template>
+      </b-modal>
+    <!-- FIN MODAL DE CADA BASCULA -->
   </div>
       </div>
 
@@ -381,14 +433,13 @@
 </template>
 
 
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <script>
 import Vue from "vue"
 import io from "socket.io-client";
-import { infobalance } from "./js/balance";
 import Notifications from 'vue-notification'
-
+import Multiselect from 'vue-multiselect'
 
 
 Vue.use(Notifications)
@@ -397,14 +448,18 @@ Vue.use(Notifications)
 export default {
   name: "Index",
 
-
-
   components: {
     // ChatChatbox,
+    Multiselect,
   },
 
   data() {
     return {
+      //MODAL BASCULAS
+      titleModal:"",
+      showModalScale: false,
+      value:null,
+
       //BARRA DE PROGRESO CARD
       maxProgressBar: 3000,
       valueProgressBar: 1500,
@@ -413,7 +468,7 @@ export default {
       modalConsultScale: false,
 
       socket: null,
-      serverUrl: "ws://127.0.0.1:3333",
+      serverUrl: "ws://192.168.25.52:3333",
       //balances: "",
 
 
@@ -427,6 +482,21 @@ export default {
         { key: "status", label: "ESTADO" }
       ],
         //INFORMACION DE LAS BASCULAS
+      nameScales:[
+        {scale:"BASCULA #1"},
+        {scale:"BASCULA #2"},
+        {scale:"BASCULA #3"},
+        {scale:"BASCULA #4"},
+        {scale:"BASCULA #5"},
+        {scale:"BASCULA #6"},
+        {scale:"BASCULA #7"},
+        {scale:"BASCULA #8"},
+        {scale:"BASCULA #9"},
+        {scale:"BASCULA #10"},
+        {scale:"BASCULA #11"},
+        {scale:"BASCULA #12"},
+    ],
+
       items: [
         { number: "1", id: "201", ip: "", weight: "0.0", units:"0",status: "INACTIVA", product:"------" ,bgColor: "danger", fontColor: "white" },
         { number: "2", id: "202", ip: "", weight: "0.0", units:"0",status: "INACTIVA", product:"------" ,bgColor: "danger", fontColor: "white"},
@@ -450,11 +520,35 @@ export default {
     this.connectToWebsocket();
 
     this.realTimeInformation()
+
+  
   },
   mounted() {
     //this.showCustom("bg-danger","Hola","h");
   },
   methods: {
+    // ------------------------------------------------------------------------------------------------------------------------------------
+    //INICIO PRODUCTOS 
+    
+    // FIN PRODUCTOS
+    // ------------------------------------------------------------------------------------------------------------------------------------
+
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------
+    // INICIO MODAL BASCULAS
+    openModalScale(text){
+      this.titleModal = text
+
+      this.showModalScale = true
+    },
+
+    closeModalScale(){
+      this.showModalScale = false
+    },
+    // FIN MODAL BASCULAS
+    //---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
     restarItems() {
       this.showCustom("bg-danger", "¡CONEXION PERDIDA!", "Se ha perdido la conexion, revise el servidor");
       //console.log("entro")
@@ -478,13 +572,14 @@ export default {
     },
 
     realTimeInformation() {
+      //console.log("a")
       this.socket.on("get-basculas", (message) => {
         if (message) {
-          //console.log(message)
+          console.log(message)
 
           let balances = JSON.parse(message)
           console.log(balances)
-          //console.log("a",this.items.length)
+          console.log("a",this.items.length)
           for (let i = 0; i < this.items.length; i++) {
             //console.log(JSON.parse(this.balances))
             if (balances.ip.includes(this.items[i].id)) {
@@ -499,7 +594,7 @@ export default {
                 this.items[i].units = (balances.weight / balances.unitWeight).toFixed(0)
               } else {
                 this.items[i].units = 0
-                this.items[i].product = "##############"
+                this.items[i].product = "-----"
               }
             }
               //this.items[i].units = (parseInt(this.balances.weight) / parseInt(this.balances.unitWeight))
@@ -518,34 +613,6 @@ export default {
       });
     },
 
-    //CONSULTAR BALANZA ESPECIFICA
-    //OBTENER BASCULAS
-    getBalance() {
-      let info = {}
-      try {
-        //console.log(this.idBalance)
-        info.number = this.idBalance.toString()
-        console.log(info)
-
-        infobalance.getinfobalance(info).then(data => {
-          console.log(data)
-          this.infoBalance = data.data
-        })
-      } catch (error) {
-        this.showCustom("bg-danger", "¡CONEXION PERDIDA!", "Se ha perdido la conexion, revise el servidor");
-      }
-    },
-
-    openModalConsultScale() {
-      this.modalConsultScale = true
-    },
-
-    closeModalConsultScale() {
-      this.modalConsultScale = false
-      this.infoBalance = ""
-      this.idBalance = ""
-    },
-
     showCustom: function (classes, title, text) {
       this.$notify({
         group: "notifications-default",
@@ -559,7 +626,10 @@ export default {
 };
 
 </script>
+
+
 <style>
+
 .table .table-danger,
 .table .table-danger>th,
 .table .table-warning>td {
@@ -594,6 +664,9 @@ export default {
 #logo-syncbox{
   width: 200px;
   padding: 0;
+}
+#btn-scale{
+  cursor: pointer;
 }
 
 
